@@ -1,0 +1,17 @@
+{
+    "name": "name2image",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "cheerio-httpcli": "^0.7.3",
+        "ejs": "^2.6.1",
+        "express": "4.17.x",
+        "ibm-watson": "^5.3.0"
+    },
+    "repository": {},
+    "engines": {
+        "node": "8.x"
+    }
+}
