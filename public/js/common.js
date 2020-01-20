@@ -11,7 +11,7 @@ $(function(){
         data: { name: name },
         success: function( result ){
           obj.remove();
-          console.log( result );
+          //console.log( result );
           if( result.status && result.urls ){
             var inner = '';
             result.urls.forEach( function( url ){
@@ -21,6 +21,7 @@ $(function(){
               inner += figure;
             });
 
+            $('#namedisplay').html( '『' + name + '』のイメージ化検索結果' );
             $('#mycarousel').html( '<div id="mycarousel-inner"></div>' );
             $('#mycarousel-inner').html( inner );
             $('#mycarousel-inner').slick({

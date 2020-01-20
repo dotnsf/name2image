@@ -23,10 +23,10 @@ var lt = new lt3({
 router.post( '/name2image', function( req, res ){
   res.contentType( 'application/json; charset=utf-8' );
 
-  var name = req.body.name;
+  var name = mytrim( req.body.name );
   if( name ){
     imagesearch( name ).then( function( urls ){
-      console.log( urls );
+      //console.log( urls );
       res.write( JSON.stringify( { status: true, urls: urls }, 2, null ) );
       res.end();
     }).catch( function( err ){
@@ -70,7 +70,7 @@ function translate( text, src, dst ){
 
 function imagesearch( text ){
   return new Promise( function( resolve, reject ){
-    console.log( 'imagesearch: text = ' + text );
+    //console.log( 'imagesearch: text = ' + text );
     var query = "";
     var cnt = 0;
     for( var i = 0; i < text.length; i ++ ){
@@ -83,15 +83,15 @@ function imagesearch( text ){
 
         cnt ++;
         if( cnt == text.length ){
-          var url = 'https://www.google.co.jp/search?q=' + query + '&source=lnms&tbm=isch';
+          var url = 'https://www.google.com/search?q=' + query + '&source=lnms&tbm=isch';
 
-          console.log( 'imagesearch: url = ' + url );
+          //console.log( 'imagesearch: url = ' + url );
           client.fetch( url, {}, 'UTF-8', function( err, $, res, body ){
             if( err ){
               console.log( err );
               reject( err );
             }else{
-              saveToFile( body, './debug.txt' );
+              //saveToFile( body, './debug.txt' );
               var urls = [];
               $('img[data-src]').each( function(){
                 var imgurl = $(this).attr( 'data-src' );
@@ -110,6 +110,10 @@ function imagesearch( text ){
       });
     }
   });
+}
+
+function mytrim( str ){
+  return str.replace( /[\s|　]/g, '' );
 }
 
 function saveToFile( text, filename ){
